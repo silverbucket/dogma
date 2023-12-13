@@ -4,7 +4,7 @@
 	import Header from "$components/framework/Header.svelte";
 	import Footer from "$components/framework/Footer.svelte";
 	import Sidebar from '$components/framework/Sidebar.svelte';
-	import { faDiagramProject } from '@fortawesome/free-solid-svg-icons';
+	import { faBorderAll } from '@fortawesome/free-solid-svg-icons';
 	import SidebarItem from '$components/framework/SidebarItem.svelte';
 
 	const headerHeightPx = 52;
@@ -26,8 +26,8 @@
 	on:toggleSidebarMode={toggleSidebarMode}
 	>
 </Header>
-<div class="flex min-h-screen">
 
+<div class="flex min-h-screen">
 	<Sidebar
 		{isSidebarExpanded}
 		{headerHeightPx}
@@ -36,13 +36,12 @@
 	>
 		<SidebarItem
 			icon={faDiagramProject}
-			label="Rollouts"
-			url="{base}/rollouts"
-			additionalActiveUrls={[`${base}/rollout/`]}
+			label="All"
+			url="{base}/all"
+			additionalActiveUrls={[`${base}/all/`]}
 			{sidebarWidthCollapsedPx}
 			{sidebarWidthsDifferencePx}
 		/>
-
 	</Sidebar>
 
 	<div class="flex flex-1 flex-col overflow-hidden bg-blue-300" style="padding-top: {headerHeightPx}px; padding-left: {sidebarWidthCollapsedPx}px;">
