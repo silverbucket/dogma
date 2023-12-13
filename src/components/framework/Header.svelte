@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import Fa from "svelte-fa";
-	import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+	import { faBars, faDog, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 	export let base = "/";
 	export let isSidebarExpanded: boolean;
@@ -23,20 +23,21 @@
 	>
 		<Fa icon={isSidebarExpanded ? faEllipsisVertical : faBars} />
 	</button>
-	<ul class="flex h-full w-full">
-		<li>
+	<ul class="flex h-full w-full pt-2 pl-4">
+		<li class="w-12">
+			<a href="{base}">
+				<slot name="logo">
+					<Fa class="text-2xl" icon={faDog} />
+				</slot>
+			</a>
+		</li>
+		<li class="pt-1">
 			<a href="{base}">
 				<h1>
 					<slot name="title">Dogma</slot>
 				</h1>
 			</a>
 		</li>
-		<li>
-			<a href="{base}">
-				<slot name="logo">
-					Logo
-				</slot>
-			</a>
-		</li>
+
 	</ul>
 </header>

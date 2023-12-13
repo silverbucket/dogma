@@ -12,6 +12,7 @@
 	const sidebarWidthCollapsedPx = 56;
 	const sidebarWidthExpandedPx = 166;
 	$: sidebarWidthsDifferencePx = sidebarWidthExpandedPx - sidebarWidthCollapsedPx;
+	$: contentOffset = isSidebarExpanded ? sidebarWidthExpandedPx : sidebarWidthCollapsedPx
 
 	function toggleSidebarMode() {
 		isSidebarExpanded = !isSidebarExpanded;
@@ -36,7 +37,7 @@
 	>
 		<SidebarItem
 			icon={faBorderAll}
-			label="All"
+			label="All Tasks"
 			url="{base}/all"
 			additionalActiveUrls={[`${base}/all/`]}
 			{sidebarWidthCollapsedPx}
@@ -44,7 +45,7 @@
 		/>
 	</Sidebar>
 
-	<div class="flex flex-1 flex-col overflow-hidden bg-blue-300" style="padding-top: {headerHeightPx}px; padding-left: {sidebarWidthCollapsedPx}px;">
+	<div class="transition-all duration-100 flex flex-1 flex-col overflow-hidden" style="padding-top: {headerHeightPx}px; padding-left: {contentOffset}px;">
 		<main class="flex-1 p-4" id="page-content">
 			<slot />
 		</main>
