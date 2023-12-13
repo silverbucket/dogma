@@ -35,7 +35,7 @@
 		{sidebarWidthExpandedPx}
 	>
 		<SidebarItem
-			icon={faDiagramProject}
+			icon={faBorderAll}
 			label="All"
 			url="{base}/all"
 			additionalActiveUrls={[`${base}/all/`]}
