@@ -1,2 +1,2 @@
-# Dogma Task Management
+# Dogma Task Manager
 
