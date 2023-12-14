@@ -1,5 +1,11 @@
-<div class="bg-amber-400">
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-</div>
+<script lang="ts">
+	import Dashboard from '$components/dashboard/Dashboard.svelte';
+	import Tasks from "$components/tasks/Tasks.svelte";
+</script>
 
+<div class="sm:hidden">
+<Dashboard></Dashboard>
+</div>
+<div class="hidden sm:block">
+<Tasks></Tasks>
+</div>

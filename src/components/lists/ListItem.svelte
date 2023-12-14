@@ -12,7 +12,8 @@
 	export let disabledMessage = "";
 	export let additionalActiveUrls: string[] = [];
 	export let sidebarWidthCollapsedPx: number;
-	export let sidebarWidthsDifferencePx: number;
+	export let sidebarWidthExpandedPx: number;
+	export let isSidebarExpanded: boolean;
 
 	let isHoveredOver = false;
 
@@ -26,17 +27,16 @@
 		isHoveredOver = false;
 	}
 
-	$: bgClass = isHoveredOver ? "bg-cyan-500" : isActive ? "bg-cyan-800" : "bg-cyan-500";
+	$: bgClass = isHoveredOver ? "bg-cyan-900" : isActive ? "bg-cyan-700" : "";
 	$: colorClass = isActive && !isHoveredOver ? "text-blue-4" : "";
 	$: colorClassForDisabled = disabled ? "text-grey-1" : "";
 	$: title = disabled ? disabledMessage : "";
+	$: sidebarWidthsDifferencePx = sidebarWidthExpandedPx - sidebarWidthCollapsedPx;
 
-	let pathname: string;
-	$: pathname = $page.url.pathname;
 
-	let isActive = checkWhetherIsActive();
+	let isActive = checkWhetherIsActive($page.url.pathname);
 
-	function checkWhetherIsActive(): boolean {
+	function checkWhetherIsActive(pathname: string): boolean {
 		if (!pathname) return false;
 		if (recursive) {
 			if (pathname.startsWith(url)) return true;
@@ -48,7 +48,7 @@
 	}
 </script>
 
-<li {title} data-test-id={"menu-item:" + id} class="h-12">
+<li {title} class="h-12">
 	<a
 		class:pointer-events-none={disabled}
 		class="relative block h-full"
@@ -57,19 +57,19 @@
 		on:mouseenter={show}
 		on:mouseleave={hide}
 	>
-		<div
-			class="absolute right-0 flex h-full items-center {bgClass} {colorClassForDisabled}"
-			style="width: {sidebarWidthsDifferencePx}px; left: {isHoveredOver
-                ? `${sidebarWidthCollapsedPx}px`
-                : ''};"
-		>
-			{label}
-		</div>
-		<div
-			class="absolute flex h-full items-center justify-center {bgClass} {colorClass} {colorClassForDisabled}"
-			style="width: {sidebarWidthCollapsedPx}px;"
-		>
-			<Fa {icon} />
+		<div class="flex overflow-hidden transition-all duration-100 {bgClass} {colorClassForDisabled}"
+				style="width: {isSidebarExpanded ? sidebarWidthExpandedPx : sidebarWidthCollapsedPx}px;"
+                >
+			<div
+				class="text-2xl p-2 {colorClass}"
+			>
+				<Fa {icon} />
+			</div>
+			<div class="p-2 absolute {!isSidebarExpanded && !isHoveredOver && 'hidden'}"
+					 style="width: {sidebarWidthsDifferencePx}px; left: {sidebarWidthCollapsedPx}px;"
+			>
+				{label}
+			</div>
 		</div>
 	</a>
 </li>

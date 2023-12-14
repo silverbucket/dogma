@@ -66,5 +66,5 @@ const mockData = {
 	]
 };
 
-const taskList = createTaskListStore();
-export default taskList;
+const tasks = createTaskListStore();
+export default tasks;
